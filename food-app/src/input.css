@@ -1,3 +1,25 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
+@layer components{
+    .btn{
+      @apply p-2 border-gray-400 border rounded 
+    }
+    .input-control{
+        @apply p-2 border-gray-400 border rounded bg-white focus:border-gray-500 focus:outline-0
+
+    }
+  }
+  
+  :root {
+    --body-bg: #f3f4f9;
+    --bg-container:#fff;
+    --border-gray : #ddd;
+    --foreground-rgb: 0, 0, 0;
+    --background-start-rgb: 214, 219, 220;
+    --background-end-rgb: 255, 255, 255;
+    --body-font : Montserrat, sans-serif;
+    --border-card: #d3e6f3;
+  }
