@@ -13,6 +13,7 @@ function filterData(searchTxt, restaurants) {
   );
 }
 
+// https://www.swiggy.com/dapi/menu/pl?page-type=REGULAR_MENU&complete-menu=true&lat=28.6126255&lng=77.04108959999999&restaurantId=17518
 const Body = () => {
   const [searchTxt, setSearchTxt] = useState("");
   const [allRestaurants, setAllRestaurants] = useState([]);
@@ -24,8 +25,10 @@ const Body = () => {
     );
     // debugger;
     const json = await data.json();
+    console.log("api data", json);
     const result =
-      json?.data.cards[2]?.card?.card?.gridElements?.infoWithStyle?.restaurants;
+      json?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle
+        ?.restaurants;
     setAllRestaurants(result);
     setFilteredRestaurants(result);
   }
@@ -59,14 +62,14 @@ const Body = () => {
         spacing={{ xs: 2, md: 3 }}
         columns={{ xs: 4, sm: 8, md: 12, lg: 16 }}
       >
-        {allRestaurants.length === 0 ? (
+        {allRestaurants?.length === 0 ? (
           <Shimmer />
         ) : filteredRestaurants?.length === 0 ? (
           <h1 className="text-center text-2xl text-red-700">
             no restaurants match your search
           </h1>
         ) : (
-          filteredRestaurants.map((restaurant, index) => (
+          filteredRestaurants?.map((restaurant, index) => (
             <Grid item xs={2} sm={4} md={4} key={index}>
               <RestaurantCard restaurant={restaurant} />
             </Grid>

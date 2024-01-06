@@ -9,7 +9,9 @@
     }
     .input-control{
         @apply p-2 border-gray-400 border rounded bg-white focus:border-gray-500 focus:outline-0
-
+    }
+    .inputGroup{
+      @apply mb-2
     }
   }
   
