@@ -4,26 +4,18 @@ import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import Card from "@mui/material/Card";
 import { Shimmer } from "react-shimmer";
+import useRestaurentMenu from "../utils/useRestaurentMenu";
+import useOnlineStatus from "../utils/useOnlineStatus";
 
 const RestaurantMenu = () => {
-  const [restaurantMenu, setRestaurantMenu] = useState({});
-  console.log("usestate()", useState());
   const params = useParams();
   const { id } = params;
-  // https://www.swiggy.com/dapi/menu/pl?page-type=REGULAR_MENU&complete-menu=true&lat=28.6126255&lng=77.04108959999999&restaurantId=17518
-  useEffect(() => {
-    getRestaurantInfo();
-  }, []);
-  async function getRestaurantInfo() {
-    const data = await fetch(
-      `https://www.swiggy.com/dapi/menu/pl?page-type=REGULAR_MENU&complete-menu=true&lat=28.6126255&lng=77.04108959999999&restaurantId=${id}`
-    );
-    const json = await data.json();
-    console.log("menu data", json.data.cards);
-    setRestaurantMenu(json?.data?.cards);
+  const restaurantMenu = useRestaurentMenu(id);
+  const onlinestatus = useOnlineStatus();
+  if (onlinestatus === false) {
+    return <h1>look like yiu are offline.. Check your internet connection</h1>;
   }
-  // const { name, cloudinaryImageId, avgRating, cuisines, totalRatingsString } =
-  // const { name } = restaurantMenu[0]?.card?.card?.info;
+
   return !restaurantMenu ? (
     <Shimmer />
   ) : (

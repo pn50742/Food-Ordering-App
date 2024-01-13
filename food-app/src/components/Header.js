@@ -14,6 +14,7 @@ import ListItemText from "@mui/material/ListItemText";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
+import useOnlineStatus from "../utils/useOnlineStatus";
 
 const drawerWidth = 240;
 const navItems = ["Home", "About", "Contact"];
@@ -25,7 +26,7 @@ function Header(props) {
   const handleDrawerToggle = () => {
     setMobileOpen((prevState) => !prevState);
   };
-
+  const onlineStatus = useOnlineStatus();
   const drawer = (
     <Box onClick={handleDrawerToggle} sx={{ textAlign: "center" }}>
       <Typography variant="h6" sx={{ my: 2 }}>
@@ -48,65 +49,71 @@ function Header(props) {
     window !== undefined ? () => window().document.body : undefined;
 
   return (
-    <Box sx={{ display: "flex" }} SX={{ backgroundColor: "#000" }}>
-      <CssBaseline />
-      <AppBar
-        component="nav"
-        sx={{
-          backgroundColor: "#000",
-        }}
-      >
-        <Toolbar>
-          <IconButton
-            color="inherit"
-            aria-label="open drawer"
-            edge="start"
-            onClick={handleDrawerToggle}
-            sx={{ mr: 2, display: { sm: "none" } }}
-          >
-            {/* <MenuIcon /> */}
-          </IconButton>
-          <Typography
-            variant="h6"
-            component="div"
-            sx={{
-              flexGrow: 1,
-              display: { xs: "none", sm: "block" },
-              color: "rgb(255 226 129)",
-            }}
-          >
-            FOOD VILA
-          </Typography>
-          <Box sx={{ display: { xs: "none", sm: "block" } }}>
-            {navItems.map((item) => (
-              <Button key={item} sx={{ color: "#fff" }}>
-                {item}
-              </Button>
-            ))}
-          </Box>
-        </Toolbar>
-      </AppBar>
-      <nav>
-        <Drawer
-          container={container}
-          variant="temporary"
-          open={mobileOpen}
-          onClose={handleDrawerToggle}
-          ModalProps={{
-            keepMounted: true, // Better open performance on mobile.
-          }}
+    <>
+      <Box sx={{ display: "flex" }} sx={{ backgroundColor: "#000" }}>
+        <CssBaseline />
+        <AppBar
+          component="nav"
           sx={{
-            display: { xs: "block", sm: "none" },
-            "& .MuiDrawer-paper": {
-              boxSizing: "border-box",
-              width: drawerWidth,
-            },
+            backgroundColor: "#000",
           }}
         >
-          {drawer}
-        </Drawer>
-      </nav>
-    </Box>
+          <Toolbar>
+            <IconButton
+              color="inherit"
+              aria-label="open drawer"
+              edge="start"
+              onClick={handleDrawerToggle}
+              sx={{ mr: 2, display: { sm: "none" } }}
+            >
+              {/* <MenuIcon /> */}
+            </IconButton>
+            <Typography
+              variant="h6"
+              component="div"
+              sx={{
+                flexGrow: 1,
+                display: { xs: "none", sm: "block" },
+                color: "rgb(255 226 129)",
+              }}
+            >
+              FOOD VILA
+            </Typography>
+            <Box sx={{ display: { xs: "none", sm: "block" } }}>
+              {navItems.map((item) => (
+                <Button key={item} sx={{ color: "#fff" }}>
+                  {item}
+                </Button>
+              ))}
+            </Box>
+          </Toolbar>
+        </AppBar>
+        <nav>
+          <Drawer
+            container={container}
+            variant="temporary"
+            open={mobileOpen}
+            onClose={handleDrawerToggle}
+            ModalProps={{
+              keepMounted: true, // Better open performance on mobile.
+            }}
+            sx={{
+              display: { xs: "block", sm: "none" },
+              "& .MuiDrawer-paper": {
+                boxSizing: "border-box",
+                width: drawerWidth,
+              },
+            }}
+          >
+            {drawer}
+          </Drawer>
+        </nav>
+      </Box>
+      <p style={{ color: "black", marginTop: "100px" }}>
+        {" "}
+        Online status: {onlineStatus ? <span>🟩</span> : <span>🔴</span>}
+      </p>
+    </>
   );
 }
 

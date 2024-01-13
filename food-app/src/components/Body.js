@@ -13,7 +13,6 @@ function filterData(searchTxt, restaurants) {
   );
 }
 
-// https://www.swiggy.com/dapi/menu/pl?page-type=REGULAR_MENU&complete-menu=true&lat=28.6126255&lng=77.04108959999999&restaurantId=17518
 const Body = () => {
   const [searchTxt, setSearchTxt] = useState("");
   const [allRestaurants, setAllRestaurants] = useState([]);
@@ -25,12 +24,24 @@ const Body = () => {
     );
     // debugger;
     const json = await data.json();
-    console.log("api data", json);
-    const result =
-      json?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle
-        ?.restaurants;
-    setAllRestaurants(result);
-    setFilteredRestaurants(result);
+    // console.log("api data", json);
+    const resData = await checkData(json);
+    setAllRestaurants(resData);
+    setFilteredRestaurants(resData);
+  }
+
+  async function checkData(jsonData) {
+    for (let i = 0; i < jsonData?.data?.cards.length; i++) {
+      // initialize checkData for Swiggy Restaurant data
+      let checkData =
+        jsonData?.data?.cards[i]?.card?.card?.gridElements?.infoWithStyle
+          ?.restaurants;
+
+      // if checkData is not undefined then return it
+      if (checkData !== undefined) {
+        return checkData;
+      }
+    }
   }
   useEffect(() => {
     const data = getRestaurants();
