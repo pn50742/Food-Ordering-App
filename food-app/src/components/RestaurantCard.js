@@ -8,7 +8,7 @@ const RestaurantCard = ({ restaurant }) => {
   // console.log("restaurantId", restaurant.info);
   const { name, cloudinaryImageId, cuisines, id } = restaurant.info;
   return (
-    <Card sx={{ padding: "15px", height: "100%" }}>
+    <div className="card">
       <Link to={`restaurant/${id}`}>
         <div
           style={{ overflow: "hidden", height: "200px", borderRadius: "6px" }}
@@ -36,7 +36,7 @@ const RestaurantCard = ({ restaurant }) => {
           ))}
         {/* <p className="text-sm mt-3">{restaurant.info.cuisines.join(", ")}</p> */}
       </Link>
-    </Card>
+    </div>
   );
 };
 

@@ -7,11 +7,29 @@
     .btn{
       @apply p-2 border-gray-400 border rounded 
     }
+    .btn--primary{
+      @apply bg-gray-900 text-white hover:bg-gray-700
+    }
     .input-control{
         @apply p-2 border-gray-400 border rounded bg-white focus:border-gray-500 focus:outline-0
     }
     .inputGroup{
       @apply mb-2
+    }
+    .nav-link{
+      @apply px-5 
+    }
+    .container{
+      @apply xl:max-w-[1200px] mx-auto
+    }
+    .card{
+      @apply bg-white rounded-md p-3 drop-shadow-md h-full
+    }
+    .row{
+      @apply flex flex-wrap gap-2 mx-[-16px]
+    }
+    .col-4{
+      @apply w-[32.333333%]
     }
   }
   

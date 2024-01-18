@@ -2,7 +2,7 @@ import React from "react";
 
 const Wrapper = (props) => {
   console.log(props.children);
-  return <div className="body-wrapper mt-28 px-20">{props.children}</div>;
+  return <div className="container pt-[90px]">{props.children}</div>;
 };
 
 export default Wrapper;
