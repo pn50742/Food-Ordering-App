@@ -1,9 +1,11 @@
 import * as React from "react";
 import { Link } from "react-router-dom";
 import useOnlineStatus from "../utils/useOnlineStatus";
+import UserContext from "../utils/UserContext";
 
 const Header = (props) => {
   const onlineStatus = useOnlineStatus();
+  const { loggedInUser } = React.useContext(UserContext);
   return (
     <>
       <header className="bg-white flex justify-between items-center w-full fixed top-0 z-10 h-[70px] drop-shadow-md">
@@ -36,6 +38,7 @@ const Header = (props) => {
                   {onlineStatus ? <span>🟩</span> : <span>🔴</span>}
                 </a>
               </li>
+              <li>{loggedInUser}</li>
             </ul>
           </nav>
         </div>

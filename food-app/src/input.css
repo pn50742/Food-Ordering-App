@@ -2,7 +2,11 @@
 @tailwind components;
 @tailwind utilities;
 
-
+@layer base {
+  svg {
+    @apply inline;
+  }
+}
 @layer components{
     .btn{
       @apply p-2 border-gray-400 border rounded 
@@ -31,6 +35,9 @@
     .col-4{
       @apply w-[32.333333%]
     }
+    .offer-tag{
+      @apply text-[.7rem] pl-[4px] text-left border-l border-gray-200 font-semibold
+    }
   }
   
   :root {
@@ -42,4 +49,9 @@
     --background-end-rgb: 255, 255, 255;
     --body-font : Montserrat, sans-serif;
     --border-card: #d3e6f3;
+  }
+
+  .offer-tag{
+    writing-mode: vertical-lr;
+    transform: rotate(180deg)
   }
