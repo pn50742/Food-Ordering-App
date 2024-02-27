@@ -1,13 +1,20 @@
 import React, { useState } from "react";
 import { IoIosArrowUp } from "react-icons/io";
 import { IMG_CDN_URL } from "../Config";
+import { useDispatch } from "react-redux";
+import { addItem } from "../utils/cartSlice";
 
 const MenuCategoryCard = ({ ...props }) => {
   //   const [isOpen, setIsOpen] = useState(true);
+  const dispatch = useDispatch();
   console.log("category card", props);
-  const { title, itemCards, showItem, setShowIndex } = props;
+  const { title, itemCards, showItem, setShowIndex, setExpanderToggle } = props;
   const handleClick = () => {
     setShowIndex();
+    setExpanderToggle();
+  };
+  const addhandler = (item) => {
+    dispatch(addItem(item));
   };
   return (
     <div className="relative border border-gray-300 rounded mt-5">
@@ -57,16 +64,23 @@ const MenuCategoryCard = ({ ...props }) => {
                       </h4>
                       <p>&#x20B9; {price / 100}</p>
                     </div>
-                    <div>
-                      <div>
-                        <button className="w-[118px] h-[96px] rounded-[6px] object-cover">
-                          <img
-                            src={IMG_CDN_URL + imageId}
-                            alt="image"
-                            className="w-[118px] h-[96px]  object-cover rounded-[6px]"
-                          />
-                        </button>
-                      </div>
+                    <div className="relative">
+                      <button className="w-[118px] h-[96px] rounded-[6px] object-cover">
+                        <img
+                          src={IMG_CDN_URL + imageId}
+                          alt="image"
+                          className="w-[118px] h-[96px]  object-cover rounded-[6px]"
+                        />
+                        <span
+                          onClick={() => addhandler(item)}
+                          className="bg-gray-800 text-white p-1 w-1/2 text-xs rounded absolute left-[30px] top-0"
+                        >
+                          Add+
+                        </span>
+                      </button>
+                      {/* <button className="bg-black-800 text-white p-2 rounded absolute">
+                        Add +
+                      </button> */}
                     </div>
                   </div>
                 );

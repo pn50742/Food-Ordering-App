@@ -9,6 +9,8 @@ import Footer from "./components/Footer";
 import Error from "./components/Error";
 import { Outlet } from "react-router-dom";
 import UserContext from "./utils/UserContext";
+import { Provider } from "react-redux";
+import appStore from "./utils/appStore";
 
 function App() {
   const [userName, setUserName] = useState();
@@ -20,13 +22,15 @@ function App() {
   }, []);
   return (
     <div className="App h-screen">
-      <UserContext.Provider value={{ loggedInUser: userName }}>
-        <Header />
-        <Wrapper>
-          <Outlet />
-        </Wrapper>
-        <Footer />
-      </UserContext.Provider>
+      <Provider store={appStore}>
+        <UserContext.Provider value={{ loggedInUser: userName }}>
+          <Header />
+          <Wrapper>
+            <Outlet />
+          </Wrapper>
+          <Footer />
+        </UserContext.Provider>
+      </Provider>
     </div>
   );
 }

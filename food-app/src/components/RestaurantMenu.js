@@ -10,6 +10,7 @@ import MenuCategoryCard from "./MenuCategoryCard";
 
 const RestaurantMenu = () => {
   const [showIndex, setShowIndex] = useState(null);
+  const [expanderToggle, setExpanderToggle] = useState(true);
   const params = useParams();
   const { id } = params;
   const restaurantMenu = useRestaurentMenu(id);
@@ -18,16 +19,15 @@ const RestaurantMenu = () => {
     return <h1>look like yiu are offline.. Check your internet connection</h1>;
   }
   if (restaurantMenu === null) return <Shimmer />;
-  console.log("restaurantMenu 2", restaurantMenu[2]);
+  // console.log("restaurantMenu 2", restaurantMenu[2]);
   const Itemcards =
     restaurantMenu[2]?.groupedCard?.cardGroupMap?.REGULAR?.cards;
-  // console.log("Itemcards", Itemcards);
   const category = Itemcards.filter(
     (item) =>
       item?.card?.card?.["@type"] ===
       "type.googleapis.com/swiggy.presentation.food.v2.ItemCategory"
   );
-  console.log("category", category);
+  // console.log("category", category);
   return (
     <div className="w-2/3 mx-auto">
       <div className="py-5 flex justify-between border-b border-gray-300">
@@ -109,8 +109,9 @@ const RestaurantMenu = () => {
         return (
           <MenuCategoryCard
             {...item?.card?.card}
-            showItem={index === showIndex ? true : false}
+            showItem={index === showIndex ? expanderToggle : false}
             setShowIndex={() => setShowIndex(index)}
+            setExpanderToggle={() => setExpanderToggle(!expanderToggle)}
           />
           // <div className="relative" key={index}>
           //   <div className="card">
